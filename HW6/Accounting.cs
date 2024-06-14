@@ -1,8 +1,11 @@
-﻿namespace HW6
+﻿using System.Transactions;
+
+namespace HW6
 {
-    public class Accounting
+    public class Accounting<T> : 
     {
-        public int hourCountMonthly {
+        public int hourCountMonthly
+        {
             get { return hourCountMonthly; }
 
 
@@ -26,7 +29,7 @@
 
             set
             {
-                
+
 
                 if ((0 <= value))
                 {
@@ -37,7 +40,7 @@
 
 
         }
-        public float Tax
+        public static float Tax
         {
             get { return Tax; }
 
@@ -45,38 +48,34 @@
 
             set
             {
-                
-                
-                if ( (0 <= value) && (value  < 1))
+
+
+                if ((0 <= value) && (value < 1))
                 {
                     Tax = value;
                 }
-                
+
             }
 
 
         }
+        public float Amount { get; private set; }
+
         public Accounting()
         {
             Tax = .1f;
-            
+
         }
-        public  virtual float TaxCalculator(float amount)
+
+        public virtual float TaxCalculator()
         {
-            return amount*Tax;
+            return Tamount * Tax;
         }
+        
         public virtual float IncomeCalculator()
         {
-            return hourCountMonthly*IncomePerHour;
+            return hourCountMonthly * IncomePerHour;
         }
-
-    }
-    public class Gold
-    {
-
-    }
-    public class GoldSale : Accounting
-    {
 
     }
 }
