@@ -4,7 +4,19 @@
     {
         public float Grammm { get; private set; }
         public static float PreisPerGramm { get; private set; }
-        public static float Amount { get; private set; }
+        
+        public static float FinancialTransactionTax
+        {
+            get
+            {
+                return FinancialTransactionTax;
+            }
+            private set
+            {
+                FinancialTransactionTax = value;
+                TaxCalculator();
+            }
+        }
         public Gold(float gramm)
         {
             if (gramm > 0) Grammm = gramm;
@@ -29,5 +41,6 @@
         {
             return Grammm * PreisPerGramm;
         }
+        
     }
 }
