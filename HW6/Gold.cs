@@ -1,10 +1,10 @@
 ﻿namespace HW6
 {
-    public class Gold : Base<T>
+    public class Gold 
     {
         public float Grammm { get; private set; }
         public static float PreisPerGramm { get; private set; }
-        public static float Amount { get; private set; }
+        
         public Gold(float gramm)
         {
             if (gramm > 0) Grammm = gramm;
@@ -13,7 +13,7 @@
                 Grammm = 1;
             }
             PreisPerGrammSetter();
-            Amount = this.PreisCalculator();
+            
 
         }
         public static bool PreisPerGrammSetter(float preis = 3000f)

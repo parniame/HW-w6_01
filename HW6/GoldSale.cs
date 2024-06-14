@@ -41,7 +41,7 @@
             
 
         }
-        private static void  TaxCalculator()
+        private static  void  TaxCalculator()
         {
             Tax = VAT + FinancialTransactionTax;
         }
@@ -87,7 +87,7 @@
             int monthDay = 30 - 6;
             return monthDay * 1500;
         }
-        public virtual float TaxCalculator(float amount )
+        public virtual float TaxCalculator(Gold gold)
         {
             return gold.PreisCalculator()*Tax;
         }

@@ -2,44 +2,8 @@
 
 namespace HW6
 {
-    public class Accounting<T> : 
+    public class Accounting
     {
-        public int hourCountMonthly
-        {
-            get { return hourCountMonthly; }
-
-
-
-            set
-            {
-
-
-                if ((0 <= value) && (value <= 300))
-                {
-                    hourCountMonthly = value;
-                }
-
-            }
-        }
-        public float IncomePerHour
-        {
-            get { return IncomePerHour; }
-
-
-
-            set
-            {
-
-
-                if ((0 <= value))
-                {
-                    IncomePerHour = value;
-                }
-
-            }
-
-
-        }
         public static float Tax
         {
             get { return Tax; }
@@ -59,22 +23,41 @@ namespace HW6
 
 
         }
-        public float Amount { get; private set; }
-
-        public Accounting()
+        private float Amount
         {
-            Tax = .1f;
+            get { return Amount; }
+
+
+
+            set
+            {
+
+
+                if ((0 <= value))
+                {
+                    Amount = value;
+                }
+
+            }
+
+
+        }
+        public Accounting(float tax = .1f)
+        {
+            Tax = Tax;
+            Amount = 100;
 
         }
 
         public virtual float TaxCalculator()
         {
-            return Tamount * Tax;
+
+            return Amount * Tax;
         }
-        
+
         public virtual float IncomeCalculator()
         {
-            return hourCountMonthly * IncomePerHour;
+            return Amount;
         }
 
     }
