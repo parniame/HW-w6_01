@@ -1,0 +1,61 @@
+public class Accounting
+    {
+        
+        public static float Tax
+        {
+            get { return Tax; }
+
+
+
+            set
+            {
+
+
+                if ((0 <= value) && (value < 1))
+                {
+                    Tax = value;
+                }
+
+            }
+
+
+        }
+        private float Amount 
+		{ 
+			get { return Amount; }
+
+
+
+            set
+            {
+
+
+                if ((0 <= value) )
+                {
+                    Amount = value;
+                }
+
+            }
+
+
+        }
+        public Accounting()
+        {
+            Tax = .1f;
+			Amount = 100;
+
+        }
+
+        public virtual float TaxCalculator(float amount)
+        {
+            
+			return amount * Tax;
+        }
+        
+        public virtual float IncomeCalculator()
+        {
+            return Amount;
+        }
+
+    }
+	
