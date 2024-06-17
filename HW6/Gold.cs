@@ -6,19 +6,19 @@
         public static float PreisPerGramm { get; private set; }
         
 
-main
-        public Gold(float gramm)
+
+        public Gold(float gramm,float preis = 3000f)
         {
             if (gramm > 0) Grammm = gramm;
             else
             {
                 Grammm = 1;
             }
-            PreisPerGrammSetter();
+            PreisPerGrammSetter(preis);
             
 
         }
-        public static bool PreisPerGrammSetter(float preis = 3000f)
+        public static bool PreisPerGrammSetter(float preis )
         {   if (preis > 0)
             {
                 PreisPerGramm = preis;
