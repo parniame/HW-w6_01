@@ -2,9 +2,10 @@
 {
     public class Employee : Accounting
     {
+        private int hourCountDaily;
         public int HourCountDaily
         {
-            get { return HourCountDaily; }
+            get { return hourCountDaily; }
 
 
 
@@ -12,16 +13,17 @@
             {
 
 
-                if ((0 <= value) && (value <= 300))
+                if ((5 <= value) && (value <= 18))
                 {
-                    HourCountDaily = value;
+                    hourCountDaily = value;
                 }
 
             }
         }
+        private float incomePerHour;
         public float IncomePerHour
         {
-            get { return IncomePerHour; }
+            get { return incomePerHour; }
 
 
 
@@ -31,7 +33,7 @@
 
                 if ((0 <= value))
                 {
-                    IncomePerHour = value;
+                    incomePerHour = value;
                 }
 
             }
@@ -42,6 +44,7 @@
         {
             HourCountDaily = hourCountDaily;
             IncomePerHour = incomePerHour;
+            //  Monthly tax
             Tax = TaxCalculator();
 
         }

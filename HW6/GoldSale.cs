@@ -7,28 +7,32 @@
             get;
             private set;
         }
+        private Gold SellingGold { get; set; }
+
+        private static float vat;
         public static float VAT
         {
             get
             {
-                return VAT;
+                return vat;
             }
             private set
             {
-                VAT = value;
-                TaxCalculator();
+                vat = value;
+                FullTaxCalculator();
             }
         }
+        private static float financialTransactionTax;
         public static float FinancialTransactionTax
         {
             get
             {
-                return FinancialTransactionTax;
+                return financialTransactionTax;
             }
             private set
             {
-                FinancialTransactionTax = value;
-                TaxCalculator();
+                financialTransactionTax = value;
+                FullTaxCalculator();
             }
         }
         public GoldSale()
@@ -36,12 +40,28 @@
             Golds = new List<Gold>();
             VAT = .1f;
             FinancialTransactionTax = .15f;
+            SellingGold = new Gold(2);
             //Tax = FinancialTransactionTax + VAT;
             
             
 
         }
-        private static  void  TaxCalculator()
+        public void WhatchGolds()
+        {   int i = 0;
+            foreach (var item in Golds)
+            {
+                Console.WriteLine($"{i+1} : Gramm : {item.Grammm}" +
+                    $",Preis : {item.PreisCalculator()}");
+                i++;
+
+            }
+        }
+        public void SaleGold(int indexOfGold, out float fullPreis)
+        {   SellingGold = Golds.ElementAt(indexOfGold);
+            fullPreis = SellingGold.PreisCalculator() + TaxCalculator();
+            Golds.Remove(SellingGold);
+        }
+        private static new void  FullTaxCalculator()
         {
             Tax = VAT + FinancialTransactionTax;
         }
@@ -49,11 +69,7 @@
         {
             Golds.Add(gold);
         }
-        public void SaleGold(Gold gold,out float fullPreis)
-        {
-            fullPreis = gold.PreisCalculator() + TaxCalculator(gold);
-            Golds.Remove(gold);
-        }
+        
         public static bool  SetVAT(float vat)
         {
             if (vat >= 0 && vat < 1)
@@ -87,9 +103,9 @@
             int monthDay = 30 - 6;
             return monthDay * 1500;
         }
-        public virtual float TaxCalculator(Gold gold)
+        public override float TaxCalculator()
         {
-            return gold.PreisCalculator()*Tax;
+            return SellingGold.PreisCalculator()*Tax;
         }
 
     }

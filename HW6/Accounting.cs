@@ -4,9 +4,11 @@ namespace HW6
 {
     public class Accounting
     {
+        private static float tax;
         public static float Tax
+
         {
-            get { return Tax; }
+            get { return tax; }
 
 
 
@@ -16,16 +18,17 @@ namespace HW6
 
                 if ((0 <= value) && (value < 1))
                 {
-                    Tax = value;
+                    tax = value;
                 }
 
             }
 
 
         }
+        private float amount;
         private float Amount
         {
-            get { return Amount; }
+            get { return amount; }
 
 
 
@@ -35,17 +38,17 @@ namespace HW6
 
                 if ((0 <= value))
                 {
-                    Amount = value;
+                    amount = value;
                 }
 
             }
 
 
         }
-        public Accounting(float tax = .1f)
+        public Accounting(float tax = .1f,float amount = 100)
         {
             Tax = Tax;
-            Amount = 100;
+            Amount = amount;
 
         }
 
