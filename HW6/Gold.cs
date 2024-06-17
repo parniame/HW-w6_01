@@ -5,6 +5,8 @@
         public float Grammm { get; private set; }
         public static float PreisPerGramm { get; private set; }
         
+
+main
         public Gold(float gramm)
         {
             if (gramm > 0) Grammm = gramm;

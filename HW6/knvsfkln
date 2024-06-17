@@ -1,0 +1,123 @@
+using System;
+					
+public class Program
+{
+	public static void Main()
+	{
+		Console.WriteLine("Hello World");
+	}
+}
+
+
+    public class Accounting
+    {
+        
+        public static float Tax
+        {
+            get { return Tax; }
+
+
+
+            set
+            {
+
+
+                if ((0 <= value) && (value < 1))
+                {
+                    Tax = value;
+                }
+
+            }
+
+
+        }
+        private float Amount 
+		{ 
+			get { return Amount; }
+
+
+
+            set
+            {
+
+
+                if ((0 <= value) )
+                {
+                    Amount = value;
+                }
+
+            }
+
+
+        }
+        public Accounting()
+        {
+            Tax = .1f;
+			Amount = 100;
+
+        }
+
+        public virtual float TaxCalculator()
+        {
+            
+			return Amount * Tax;
+        }
+        
+        public virtual float IncomeCalculator()
+        {
+            return Amount;
+        }
+
+    }
+	
+	public class employee : Accounting{
+	 public int hourCount
+        {
+            get { return hourCount; }
+
+
+
+            set
+            {
+
+
+                if ((0 <= value) && (value <= 300))
+                {
+                    hourCount = value;
+                }
+
+            }
+        }
+        public float IncomePerHour
+        {
+            get { return IncomePerHour; }
+
+
+
+            set
+            {
+
+
+                if ((0 <= value))
+                {
+                    IncomePerHour = value;
+                }
+
+            }
+
+
+        }
+		public override float TaxCalculator()
+        {	float income =  IncomeCalculator();
+			if(income < 10)
+            return 1f;
+        }
+        
+        public override float IncomeCalculator()
+        {
+            return hourCount * IncomePerHour* 30;
+        }
+		
+	
+	}
+
