@@ -1,4 +1,5 @@
-﻿using System.Transactions;
+﻿using System.Globalization;
+using System.Transactions;
 
 namespace HW6
 {
@@ -16,7 +17,7 @@ namespace HW6
             {
 
 
-                if ((0 <= value) && (value < 1))
+                if (IsPercentage(value))
                 {
                     tax = value;
                 }
@@ -36,7 +37,7 @@ namespace HW6
             {
 
 
-                if ((0 <= value))
+                if (IsPositive(value))
                 {
                     amount = value;
                 }
@@ -45,13 +46,30 @@ namespace HW6
 
 
         }
-        public Accounting(float tax = .1f,float amount = 100)
+        public Accounting(float tax = .1f,float amount = 100)//10% پیش فرض
         {
             Tax = Tax;
             Amount = amount;
 
         }
-
+        protected static bool IsPercentage(float num)
+        {
+            if (num >= 0 && num < 1) { return true; } else { return false; }
+        }
+        protected static bool IsPositive(float num)
+        {
+            if (num >= 0) { return true; } else { return false; };
+        }
+         public static string PrintThreeDigit(float number)
+        {
+            number *= 10000;
+            return number.ToString("N0", new NumberFormatInfo()
+            {
+                NumberGroupSizes = new[] { 3 },
+                NumberGroupSeparator = ","
+            }) ;
+            
+        }
         public virtual float TaxCalculator()
         {
 
