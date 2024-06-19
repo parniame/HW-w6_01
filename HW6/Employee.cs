@@ -71,6 +71,8 @@
                 Tax = .09f;
                 
             }
+             //اگر ده ملیون به بالا باشد؛ با درصد پیش فرض در کلاس والد حساب میشود
+             //و نیاز به تغییر مقدار درصد مالیات نیست
            
             return income * Tax;
 
@@ -87,7 +89,7 @@
 
         public override float IncomeCalculator()
         {
-            return HourCountDaily * IncomePerHour * 30;
+            return HourCountDaily * IncomePerHour * 30;// 30 روز کاری
         }
 
 

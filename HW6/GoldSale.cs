@@ -1,4 +1,6 @@
-﻿namespace HW6
+﻿using static System.Net.WebRequestMethods;
+
+namespace HW6
 {
     public class GoldSale : Accounting
     {
@@ -7,61 +9,74 @@
             get;
             private set;
         }
-        private Gold SellingGold { get; set; }
+        private Gold SellingGold { get; set; }//The gold that is being Selled
 
-        private static float vat;
-        public static float VAT
+        
+        private static float VAT//ارزش افزوده
+        {
+            get;
+
+            set;
+            
+        }
+        
+        private static float FinancialTransactionTax// مالیات معامله
+        {
+            get; set;
+        }
+        private float dailyIncome;
+        public  float DailyIncome
         {
             get
             {
-                return vat;
+                return dailyIncome;
             }
-            private set
+             set
             {
-                vat = value;
-                FullTaxCalculator();
+                if(IsPositive(value))
+                {
+                    dailyIncome = value;
+                }
             }
         }
-        private static float financialTransactionTax;
-        public static float FinancialTransactionTax
-        {
-            get
-            {
-                return financialTransactionTax;
-            }
-            private set
-            {
-                financialTransactionTax = value;
-                FullTaxCalculator();
-            }
-        }
-        public GoldSale()
+        public GoldSale(float vAT = .1f,//درصد مالیات بر ارزش افزوده10 و 15 درصد مالیات معامله ی طلا
+        float financialTransactionTax = .15f,float dailyIncome = 1500f)//روزی یکو نیم ملیون
         {
             Golds = new List<Gold>();
-            VAT = .1f;
-            FinancialTransactionTax = .15f;
-            SellingGold = new Gold(2);
-            //Tax = FinancialTransactionTax + VAT;
+            VAT = vAT;
+            FinancialTransactionTax = financialTransactionTax;
+            FullTaxCalculator();//  (parent property)Tax = VAT + FinancialTransactionTax;
+            DailyIncome = dailyIncome;
+            SellingGold = new Gold(2);//initialize so we dont get null refrence error
             
-            
+
+
 
         }
         public void WhatchGolds()
-        {   int i = 0;
-            foreach (var item in Golds)
-            {
-                Console.WriteLine($"{i+1} : Gramm : {item.Grammm}" +
-                    $",Preis : {item.PreisCalculator()}");
-                i++;
+        {   if(Golds.Capacity != 0) {
+                int i = 0;
+                foreach (var item in Golds)
+                {
+                    Console.WriteLine($"index :{i + 1}" +$"\nGramm : {item.Grammm}" +
+                        $"\nPreis : {PrintThreeDigit(item.PreisCalculator())}");
+                    i++;
 
+                }
             }
+        else
+            {
+                Console.WriteLine("There is No Gold!");
+            }
+            
         }
         public void SaleGold(int indexOfGold, out float fullPreis)
-        {   SellingGold = Golds.ElementAt(indexOfGold);
+        {
+            SellingGold = Golds.ElementAt(indexOfGold);
             fullPreis = SellingGold.PreisCalculator() + TaxCalculator();
             Golds.Remove(SellingGold);
         }
-        private static new void  FullTaxCalculator()
+        private static new void FullTaxCalculator()//Update Tax
         {
             Tax = VAT + FinancialTransactionTax;
         }
@@ -69,26 +84,13 @@
         {
             Golds.Add(gold);
         }
-        
-        public static bool  SetVAT(float vat)
+
+        public static bool SetVAT(float vat)
         {
-            if (vat >= 0 && vat < 1)
+            if (IsPercentage(vat))
             {
                 VAT = vat;
-                
-                return true;
-            }
-
-            
-            else 
-                return false;
-            
-        }
-        public static bool SetFinancialTransactionTax(float FTT)
-        {
-            if (FTT >= 0 && FTT < 1)
-            {
-                FinancialTransactionTax = FTT;
+                FullTaxCalculator();//Update Tax
                 return true;
             }
 
@@ -97,16 +99,31 @@
                 return false;
 
         }
-        
+        public static bool SetFinancialTransactionTax(float FTT)
+        {
+            if (IsPercentage(FTT))
+            {
+                FinancialTransactionTax = FTT;
+                FullTaxCalculator();//Update Tax
+                return true;
+            }
+
+
+            else
+                return false;
+
+        }
+
         public override float IncomeCalculator()
         {
             int monthDay = 30 - 6;
-            return monthDay * 1500;
+            return monthDay * DailyIncome;
         }
         public override float TaxCalculator()
         {
-            return SellingGold.PreisCalculator()*Tax;
+            return SellingGold.PreisCalculator() * Tax;
         }
+        
 
     }
 }
