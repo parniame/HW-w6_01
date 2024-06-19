@@ -6,18 +6,19 @@
         public static float PreisPerGramm { get; private set; } = 3000f;// هر گرم 3 میلیون تومان
 
 
-        public Gold(float gramm)
+
+
         {
             if (gramm > 0) Grammm = gramm;
             else
             {
                 Grammm = 1;
             }
-           
+
             
 
         }
-        public static bool PreisPerGrammSetter(float preis = 3000f)
+        public static bool PreisPerGrammSetter(float preis )
         {   if (preis > 0)
             {
                 PreisPerGramm = preis;
