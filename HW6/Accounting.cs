@@ -25,7 +25,7 @@ namespace HW6
             }
 
 
-        }
+        }//قهیثق
         private float amount;
         private float Amount
         {
